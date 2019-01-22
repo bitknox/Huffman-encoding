@@ -1,9 +1,9 @@
 
-
+var removetree
 var codeArray = []
-var originalTree = buildTree('teststring')[1]
+var originalTree = buildTree('hugeassmemsdudedoyoumindthis?')[1]
 
-treeToCodes(buildTree('teststring')[1], "")
+treeToCodes(buildTree('hugeassmemsdudedoyoumindthis?')[1], "")
 
 //console.log(JSON.stringify(buildTree('twojastarazapierdala')))
 //console.log(originalTree.left)
@@ -49,26 +49,40 @@ function buildTree (string) {
   return sorted[0]
 }
 
-function treeToCodes(tree){
+function treeToCodes(tree, code){
+
 if(tree == undefined) {
   return
 } else {
 if(tree.left != null){
   if(typeof(tree.left) == "object"){
-    treeToCodes(tree.left)
+    code += "0"
+    treeToCodes(tree.left, code)
   }
   if(typeof(tree.left) == "string"){
+    removetree = tree
+    code+= "0"
+    console.log(code)
     console.log(tree.left)
+    code = code.slice(0, -1)
     if(typeof(tree.right) == "object"){
-      treeToCodes(tree.right)
+      code += "1"
+      treeToCodes(tree.right, code)
     }
     if(typeof(tree.right) == "string"){
+      code += "1"
+      console.log(code)
       console.log(tree.right)
+      //delete removetree because both children have been printed - call function
     }
   }
 } else if(tree.right != null){
+  //if left has been deleted do something
+}
+if(tree.right = null && tree.left == null){
+  //delete the parent because it has no children - call function
 
 }
-
 }
+
 }
