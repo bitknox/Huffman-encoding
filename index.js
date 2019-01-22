@@ -1,9 +1,9 @@
 
 
 var codeArray = []
-var originalTree = buildTree('fakhed')[1]
+var originalTree = buildTree('teststring')[1]
 
-treeToCodes(buildTree('fakhed')[1], "")
+treeToCodes(buildTree('teststring')[1], "")
 
 //console.log(JSON.stringify(buildTree('twojastarazapierdala')))
 //console.log(originalTree.left)
