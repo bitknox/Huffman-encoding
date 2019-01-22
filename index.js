@@ -1,7 +1,10 @@
 
 
-var originalTree = buildTree('twojastarazapierdala')
-treeToCodes(buildTree('twojastarazapierdala'), "")
+var codeArray = []
+var originalTree = buildTree('fakhed')[1]
+
+treeToCodes(buildTree('fakhed')[1], "")
+
 //console.log(JSON.stringify(buildTree('twojastarazapierdala')))
 //console.log(originalTree.left)
 function Node (data, right, left) {
@@ -45,30 +48,47 @@ function buildTree (string) {
   }
   return sorted[0]
 }
-var prefix = ""
-var ary = []
-function treeToCodes(tree, prefix){
-if(tree !== null){
-    for(var k in tree){
-      if(typeof(tree[k]) == "object"){
-        if(isNaN(tree[k])){
-          if(tree[k].right == "object"){
-            treeToCodes(tree[k].right, prefix +"1")
-          }
-          else {
-            console.log("Found leaf" + prefix)
-          }
-          if(tree[k].left == "object"){
-            treeToCodes(tree[k].left, prefix+"0")
-          } else {
-            console.log("Found leaf" + prefix)
-          }
-      } else{
-        console.log("Found end...")
-      }
+
+function treeToCodes(tree , code){
+if(tree == undefined) {
+  return
+} else {
+
+  if(tree.left == null){
+  if(typeof(tree.right) == "object"){
+    code += "1"
+    treeToCodes(tree.right,code)
+  }
+  if(typeof(tree.right) == "string"){
+    code += "1"
+    console.log(tree.right, code)
+    code = code.slice(0,-1)
+    code += "0"
+    console.log(tree.left, code)
+    var treestring = JSON.stringify(tree)
+    var orgtree = JSON.stringify(originalTree)
+    var newtree = JSON.parse(orgtree.replace(treestring, null))
+    treeToCodes(newtree,"")
+  }
+} else {
+  if(typeof(tree.left) == "object"){
+    code += "0"
+    treeToCodes(tree.left, code)
+  }
+  if(typeof(tree.left) == "string"){
+    code += "0"
+    console.log(tree.left, code);
+    code = code.slice(0,-1)
+    code += "1"
+    console.log(tree.right, code);
+    var treestring = JSON.stringify(tree)
+    var orgtree = JSON.stringify(originalTree)
+    var newtree = JSON.parse(orgtree.replace(treestring, null ))
+    console.log(JSON.stringify(newtree))
+    treeToCodes(newtree, "")
   }
 }
-} else {
-  console.log("Tree was null")
+
+
 }
 }
