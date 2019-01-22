@@ -49,46 +49,26 @@ function buildTree (string) {
   return sorted[0]
 }
 
-function treeToCodes(tree , code){
+function treeToCodes(tree){
 if(tree == undefined) {
   return
 } else {
-
-  if(tree.left == null){
-  if(typeof(tree.right) == "object"){
-    code += "1"
-    treeToCodes(tree.right,code)
-  }
-  if(typeof(tree.right) == "string"){
-    code += "1"
-    console.log(tree.right, code)
-    code = code.slice(0,-1)
-    code += "0"
-    console.log(tree.left, code)
-    var treestring = JSON.stringify(tree)
-    var orgtree = JSON.stringify(originalTree)
-    var newtree = JSON.parse(orgtree.replace(treestring, null))
-    treeToCodes(newtree,"")
-  }
-} else {
+if(tree.left != null){
   if(typeof(tree.left) == "object"){
-    code += "0"
-    treeToCodes(tree.left, code)
+    treeToCodes(tree.left)
   }
   if(typeof(tree.left) == "string"){
-    code += "0"
-    console.log(tree.left, code);
-    code = code.slice(0,-1)
-    code += "1"
-    console.log(tree.right, code);
-    var treestring = JSON.stringify(tree)
-    var orgtree = JSON.stringify(originalTree)
-    var newtree = JSON.parse(orgtree.replace(treestring, null ))
-    console.log(JSON.stringify(newtree))
-    treeToCodes(newtree, "")
+    console.log(tree.left)
+    if(typeof(tree.right) == "object"){
+      treeToCodes(tree.right)
+    }
+    if(typeof(tree.right) == "string"){
+      console.log(tree.right)
+    }
   }
-}
+} else if(tree.right != null){
 
+}
 
 }
 }
