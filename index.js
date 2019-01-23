@@ -1,9 +1,15 @@
 
 var removetree
+var decoded = ""
 var codes = {}
-var originalTree = buildTree('hugeassmemsdudedoyoumindthis?')[1]
-treeToCodes(buildTree('hugeassmemsdudedoyoumindthis?')[1], '')
-createString('hugeassmemsdudedoyoumindthis?', codes)
+var originalTree = buildTree('teststring')[1]
+var decodetree = buildTree('teststring')[1]
+treeToCodes(buildTree('teststring')[1], '')
+var codestring = createString('teststring', codes)
+console.log(codestring);
+decode(decodetree, codestring)
+console.log(decoded)
+
 function Node (data, right, left) {
   this.data = data
   this.right = right
@@ -93,26 +99,37 @@ function createString (string, codes) {
   for (var i = 0; i < string.length; i++) {
     codestring += codes[string.charAt(i)]
   }
-  console.log(codestring)
+  return codestring
 }
 //work in progess
 function decode(tree, codestring){
-  var orgtree = tree
-  for (var i = 0; i < codestring.length; i++) {
-    if(codestring.chatAt(i) == 1){
-        if(typeof(tree.right) == "object"){
-          tree = tree.right
-        }
-        if(typeof(tree.right) == "string"){
-          return tree.right
-        }
-    } else {
-      if(typeof(tree.left) == "object"){
-        tree = tree.left
-      }
-      if(typeof(tree.left) == "string"){
-        return tree.left
-      }
-    }
+  console.log(codestring.length)
+if(codestring.length > -1){
+  console.log(codestring.length)
+char = codestring.charAt(0);
+newcode = codestring.substring(1);
+console.log(newcode)
+if(char == "1"){
+  console.log(typeof(tree.right))
+  if(typeof(tree.right) == "object"){
+    decode(tree.right, newcode)
   }
+  if(typeof(tree.right) == "string"){
+    console.log(tree.right + "was end")
+    decoded += tree.right
+    decode(decodetree, newcode)
+  }
+}
+if(char == "0"){
+  console.log(typeof(tree.left))
+  if(typeof(tree.left) == "object"){
+    decode(tree.left, newcode)
+  }
+  if(typeof(tree.left) == "string"){
+    console.log(tree.left + "was end")
+    decoded += tree.left
+    decode(decodetree, newcode)
+  }
+}
+}
 }
