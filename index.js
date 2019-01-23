@@ -95,3 +95,24 @@ function createString (string, codes) {
   }
   console.log(codestring)
 }
+//work in progess
+function decode(tree, codestring){
+  var orgtree = tree
+  for (var i = 0; i < codestring.length; i++) {
+    if(codestring.chatAt(i) == 1){
+        if(typeof(tree.right) == "object"){
+          tree = tree.right
+        }
+        if(typeof(tree.right) == "string"){
+          return tree.right
+        }
+    } else {
+      if(typeof(tree.left) == "object"){
+        tree = tree.left
+      }
+      if(typeof(tree.left) == "string"){
+        return tree.left
+      }
+    }
+  }
+}
