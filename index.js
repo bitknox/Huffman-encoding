@@ -49,8 +49,8 @@ function buildTree (string) {
   return sorted[0]
 }
 
-function treeToCodes(tree, code){
 
+function treeToCodes(tree, code){
 if(tree == undefined) {
   return
 } else {
@@ -73,16 +73,31 @@ if(tree.left != null){
       code += "1"
       console.log(code)
       console.log(tree.right)
-      //delete removetree because both children have been printed - call function
+      var removestring = JSON.stringify(removetree)
+      var tree = JSON.stringify(originalTree)
+      originalTree = JSON.parse(tree.replace(removestring, null))
+      treeToCodes(originalTree, "")
     }
   }
 } else if(tree.right != null){
-  //if left has been deleted do something
+  if(typeof(tree.right) == "object"){
+    code += "1"
+    treeToCodes(tree.right, code)
+  }
 }
-if(tree.right = null && tree.left == null){
+else {
+    removetree = tree
+    var removestring = JSON.stringify(removetree)
+    var tree = JSON.stringify(originalTree)
+    originalTree = JSON.parse(tree.replace(removestring, null))
+    treeToCodes(originalTree, "")
+  }
+
+
+
+//if(tree.right.left == null && tree.left.left == null){
   //delete the parent because it has no children - call function
-
+//  console.log("Left and right was null")
+//}
 }
-}
-
 }
