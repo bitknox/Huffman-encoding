@@ -42,12 +42,18 @@ function buildTree(string) {
 	}
 	var freqss = frequency(string)
 	var sorted = sortfreq(freqss)
+	console.log(sorted.length)
 	while (sorted.length > 1) {
 		var tree = new Node(sorted[0][0] + sorted[1][0], sorted[1][1], sorted[0][1])
 		var index = sorted[0][0] + sorted[1][0]
 		sorted.remove(0)
 		sorted.remove(0)
 		sorted.push([index, tree])
+	}
+	if(sorted.length == 1){
+		var tree = new Node(sorted[0][0], null, sorted[0][1])
+		sorted.remove(0)
+		sorted.push([index,tree])
 	}
 	return sorted[0]
 }
