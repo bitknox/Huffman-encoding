@@ -1,14 +1,23 @@
 var removetree
+var same
 var decoded = ""
 var codes = {}
-var originalTree = buildTree('teststring')[1]
-var decodetree = buildTree('teststring')[1]
-treeToCodes(buildTree('teststring')[1], '')
-console.log(buildTree('teststring')[1])
-var codestring = createString('teststring', codes)
+const encodestring = "hello"
+var originalTree = buildTree(encodestring)[1]
+const decodetree = buildTree(encodestring)[1]
+treeToCodes(buildTree(encodestring)[1], '')
+console.log(buildTree(encodestring)[1])
+var codestring = createString(encodestring, codes)
 console.log(codestring);
 decode(decodetree, codestring)
-console.log(decoded)
+console.log("Original string: " + encodestring)
+console.log("Decoded string: " + decoded)
+if(encodestring == decoded){
+	same = true
+} else {
+	same = false
+}
+console.log("Are they the same?    " + same)
 
 function Node(data, right, left) {
 	this.data = data
@@ -42,7 +51,6 @@ function buildTree(string) {
 	}
 	var freqss = frequency(string)
 	var sorted = sortfreq(freqss)
-	console.log(sorted.length)
 	while (sorted.length > 1) {
 		var tree = new Node(sorted[0][0] + sorted[1][0], sorted[1][1], sorted[0][1])
 		var index = sorted[0][0] + sorted[1][0]
@@ -60,7 +68,7 @@ function buildTree(string) {
 
 function treeToCodes(tree, code) {
 	if (tree == undefined) {
-
+		return codes
 	} else {
 		if (tree.left != null) {
 			if (typeof (tree.left) === 'object') {
@@ -114,7 +122,7 @@ function createString(string, codes) {
 	}
 	return codestring
 }
-//work in progess
+
 function decode(tree, codestring) {
 	console.log(codestring.length)
 	if (codestring.length > -1) {
