@@ -2,13 +2,11 @@ var removetree
 var same
 var decoded = ""
 var codes = {}
-const encodestring = "hello"
+const encodestring = "teststring"
 var originalTree = buildTree(encodestring)[1]
-const decodetree = buildTree(encodestring)[1]
+const decodetree = originalTree
 treeToCodes(buildTree(encodestring)[1], '')
-console.log(buildTree(encodestring)[1])
 var codestring = createString(encodestring, codes)
-console.log(codestring);
 decode(decodetree, codestring)
 console.log("Original string: " + encodestring)
 console.log("Decoded string: " + decoded)
@@ -124,33 +122,28 @@ function createString(string, codes) {
 }
 
 function decode(tree, codestring) {
-	console.log(codestring.length)
 	if (codestring.length > -1) {
-		console.log(codestring.length)
 		char = codestring.charAt(0);
 		newcode = codestring.substring(1);
-		console.log(newcode)
 		if (char == "1") {
-			console.log(typeof (tree.right))
 			if (typeof (tree.right) == "object") {
 				decode(tree.right, newcode)
 			}
 			if (typeof (tree.right) == "string") {
-				console.log(tree.right + "was end")
 				decoded += tree.right
 				decode(decodetree, newcode)
 			}
 		}
 		if (char == "0") {
-			console.log(typeof (tree.left))
 			if (typeof (tree.left) == "object") {
 				decode(tree.left, newcode)
 			}
 			if (typeof (tree.left) == "string") {
-				console.log(tree.left + "was end")
 				decoded += tree.left
 				decode(decodetree, newcode)
 			}
 		}
+	} else {
+		return decoded
 	}
 }
